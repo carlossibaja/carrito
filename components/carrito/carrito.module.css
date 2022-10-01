@@ -1,0 +1,40 @@
+.container{
+    /* background-color: red; */
+    padding: 10px 10%;
+}
+.productos{
+    margin-bottom: 5px;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 5px;
+    border-radius: 3px;
+    width: 70%;
+}
+
+.card{
+    background-color: white;
+    display: flex;
+    margin-bottom: 5px;
+    /* border-bottom: 1px solid rgb(219, 219, 219); */
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+.img{
+    width: 100px;
+}
+
+.carrito{
+    display: flex;
+    justify-content: space-between;
+    /* grid-template-columns: 70% 30%;
+    grid-column-gap: 10px; */
+    
+}
+.total{
+    padding:5px;
+    border:1px solid rgb(219, 219, 219); 
+    border-radius:3px;
+    position: absolute;
+    height: 200px;
+    width: 23%
+}
