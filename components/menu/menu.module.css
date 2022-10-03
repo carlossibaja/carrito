@@ -31,9 +31,11 @@
 
 @media( max-width: 900px ){
     .menu{
-        padding: 5px 15px;
+        padding: 3px 15px;
+        width: 100%;
     }
     .li{
         display: none;
     }
 }
+
