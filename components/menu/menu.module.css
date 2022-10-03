@@ -28,3 +28,12 @@
 .carrito:hover{
     background-color: #f3f3f4;
 }
+
+@media( max-width: 900px ){
+    .menu{
+        padding: 5px 15px;
+    }
+    .li{
+        display: none;
+    }
+}

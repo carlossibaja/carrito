@@ -70,7 +70,7 @@ export const Carrito = () => {
                   ))
                 }
               </div>
-              <div style={{width:"29%"}} >
+              <div className={styles.containerTotal} >
                 <div  >
                   <div className={styles.total} style={{display:"flex", justifyContent:"space-between" }} >
                     <p style={{fontSize:"20px", fontWeight:"700"}} >Total</p>

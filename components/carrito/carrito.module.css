@@ -38,3 +38,27 @@
     height: 200px;
     width: 23%
 }
+.containerTotal{
+    width: 29%;
+}
+@media( max-width: 900px ){
+    .container{
+        padding: 0px 15px;
+    }
+    .carrito{
+        display: contents;
+    }
+    .productos{
+        width: auto;
+    }
+    .total{
+        width: auto;
+        height: auto;
+        position: relative;
+    }
+    .containerTotal{
+        display: contents;
+        width: 100%;
+        background-color: rebeccapurple;
+    }
+}
