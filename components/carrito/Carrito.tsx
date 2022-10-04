@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { Products } from '../../database/database'
 import styles from "../carrito/carrito.module.css"
 
 interface cart {
   imagen:string,
   nombre:string,
   precio:number,
-  cantidad:number
+  cantidad:number,
+  id:number
 }
 
 export const Carrito = () => {
@@ -14,7 +16,7 @@ export const Carrito = () => {
     const getCarrito = async() => {
       const  carrito = await localStorage.getItem("carrito") as string
       const carritoObjet =  JSON.parse(carrito)
-      console.log(carritoObjet)
+      // console.log(carritoObjet)
       if(carritoObjet === null ){
         setCarrito([])
       }else{
@@ -35,7 +37,7 @@ export const Carrito = () => {
     initialValue
   )
 
-  console.log(total)
+  // console.log(total)
   function currencyFormat(num:Number) {
     return '$ ' + num.toFixed().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
@@ -43,6 +45,45 @@ export const Carrito = () => {
   const deleteProducts = () => {
     localStorage.removeItem("carrito")
     setCarrito([])
+  }
+
+  const incrementCuantity = (id:Number) => {
+
+    const precio:any = Products.find(item => {
+      return item.id === id
+    })
+
+    carrito.find(producto  => {
+      if(producto.id === id){
+        producto.cantidad = producto.cantidad +1
+        producto.precio = producto.cantidad * precio?.price
+        // console.log(producto)
+      }
+    })
+    
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    const newData = JSON.parse(localStorage.getItem("carrito")as string)
+    setCarrito(newData)
+
+  }
+  const decrementCuantity = (id:Number) => {
+
+    const precio:any = Products.find(item => {
+      return item.id === id
+    })
+
+    carrito.find(producto  => {
+      if(producto.id === id){
+        producto.cantidad = producto.cantidad -1
+        producto.precio = producto.cantidad * precio?.price
+        console.log(producto)
+      }
+    })
+    
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    const newData = JSON.parse(localStorage.getItem("carrito")as string)
+    setCarrito(newData)
+
   }
 
   return (
@@ -66,9 +107,9 @@ export const Carrito = () => {
                         </div>
                       </div>
                       <div style={{display:"flex", justifyContent:"space-between"}} >
-                        <button disabled style={{padding:"5px"}} onClick={()=> setCounter(counter -1) } >-</button>
-                        <p style={{width:"25%", padding:"5px", fontWeight:"600"}} >{counter}</p>
-                        <button disabled style={{padding:"5px"}} onClick={()=> setCounter(counter +1)} >+</button>
+                        <button style={{padding:"5px"}} onClick={()=> decrementCuantity(productos.id) } >-</button>
+                        <p style={{width:"25%", padding:"5px", fontWeight:"600"}} >{productos.cantidad}</p>
+                        <button style={{padding:"5px"}} onClick={()=> incrementCuantity(productos.id)} >+</button>
                       </div>
                       <p style={{width:"25%"}} >Total: { currencyFormat(counter * productos.precio)}</p>
                     </div>
