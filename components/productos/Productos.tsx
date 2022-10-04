@@ -5,12 +5,13 @@ import styles from "../productos/productos.module.css"
 
 export const Productos = () => {
 
-    const addCart = ( nombre:string, cantidad:number, precio:number,imagen:string ) =>{
+    const addCart = ( nombre:string, cantidad:number, precio:number,imagen:string, id:number ) =>{
         const Data = {
             nombre,
             cantidad,
             precio,
-            imagen
+            imagen,
+            id
         }
         const getCarrito = localStorage.getItem("carrito") as string
 
@@ -46,7 +47,7 @@ export const Productos = () => {
                             <p>{currencyFormat(producto.price)}</p>
                         </div>
                         <div style={{padding:"5px"}} >
-                            <button onClick={() => addCart(producto.name, 1,producto.price, producto.img)} className={styles.addcart}  >Añadir al carrito</button>
+                            <button onClick={() => addCart(producto.name, 1,producto.price, producto.img, producto.id)} className={styles.addcart}  >Añadir al carrito</button>
                         </div>
                     </div>
                 ))

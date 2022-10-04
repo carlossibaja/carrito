@@ -40,6 +40,11 @@ export const Carrito = () => {
     return '$ ' + num.toFixed().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 
+  const deleteProducts = () => {
+    localStorage.removeItem("carrito")
+    setCarrito([])
+  }
+
   return (
     <section className={styles.container} > 
       <h1>Mi carrito</h1>
@@ -78,9 +83,12 @@ export const Carrito = () => {
                   </div>
                 </div>
               </div>
+              
             </div>
+       
           
         }
+        <button onClick={() => deleteProducts()} >Eliminar Todos los productos</button>
         
     </section>
   )
