@@ -2,22 +2,11 @@ import React, { useEffect, useState} from 'react'
 import Link from 'next/link'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import styles from "../menu/menu.module.css"
+import { useCart } from '../../hooks/useCart';
 
 export const Menu = () => {
-
-    const [total, setTotal] = useState(0)
-    useEffect(() => {
-      const getCarrito = () => {
-        const cart = JSON.parse(localStorage.getItem("carrito")as string)
-        if( cart === null ){
-            setTotal(0)
-        }else{
-            setTotal(cart.length)
-        }
-      }
-      getCarrito()
-    }, [])
     
+    const { carrito, setCarrito } = useCart()
 
   return (
     <menu className={styles.menu} > 
@@ -53,7 +42,7 @@ export const Menu = () => {
                         alignItems:"center",
                         right:"160px",
                         top:"35px"
-                    }} >{total}</p>
+                    }} >{carrito.length}</p>
                     <ShoppingCartOutlinedIcon/>
                     <a>Carrito</a>
                 </div>

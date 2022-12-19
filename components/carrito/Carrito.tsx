@@ -1,36 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Products } from '../../database/database'
-import cart from '../../pages/cart'
+
+import { useCart } from '../../hooks/useCart'
 import styles from "../carrito/carrito.module.css"
 
-interface cart {
-  imagen:string,
-  nombre:string,
-  precio:number,
-  cantidad:number,
-  id:number,
-  total:number
-}
 
 export const Carrito = () => {
-
-  useEffect(() => {
-    const getCarrito = async() => {
-      const  carrito = await localStorage.getItem("carrito") as string
-      const carritoObjet =  JSON.parse(carrito)
-      // console.log(carritoObjet)
-      if(carritoObjet === null ){
-        setCarrito([])
-      }else{
-        setCarrito(carritoObjet)
-      }
-    }
-    getCarrito()
-  }, [])
-
-  const [carrito, setCarrito] = useState<cart[]>([])
-  const [counter, setCounter] = useState(1)
-
+  
+  const { carrito, setCarrito } = useCart()
    
   const valores = carrito.map(valor => valor.total)
   const initialValue = 0
@@ -55,7 +30,6 @@ export const Carrito = () => {
       if(producto.id === id){
         producto.cantidad = producto.cantidad +1
         producto.total = producto.cantidad * producto.precio
-        // console.log(producto)
       }
     })
     
@@ -64,6 +38,7 @@ export const Carrito = () => {
     setCarrito(newData)
 
   }
+
   const decrementCuantity = (id:Number) => {
 
     carrito.find(producto  => {
